@@ -6,14 +6,18 @@ import {
   YOUTUBE_SEARCH_API,
 } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleMenu } from "../utils/appSlice";
+import { searched, toggleMenu } from "../utils/appSlice";
 import { cacheResults } from "../utils/searchSlice";
+import { Link } from "react-router-dom";
 
 const Head = () => {
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const searchCache = useSelector((store) => store.search);
+  const handleSearchClick = () => {
+    dispatch(searched());
+  };
 
   useEffect(() => {
     // Concept of debouncing
@@ -59,8 +63,10 @@ const Head = () => {
         {suggestions.length > 0 && (
           <div className="absolute bg-white py-2 px-2 w-[37rem] shadou-lg rounded-lg border border-gray-300">
             <ul>
-              {suggestions.map((s) => (
-                <li>{s}</li>
+              {suggestions.map((s, index) => (
+                <li key={index} onClick={handleSearchClick}>
+                  <Link to={"/search?q=" + s}>{s}</Link>
+                </li>
               ))}
             </ul>
           </div>

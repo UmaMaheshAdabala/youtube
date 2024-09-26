@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { USER_LOGO } from "../utils/constants";
 
 const commentData = [
@@ -86,9 +86,9 @@ const Comment = ({ data }) => {
 const CommentList = ({ comments }) => {
   return (
     <div>
-      {comments.map((comment) => {
+      {comments.map((comment, index) => {
         return (
-          <div>
+          <div key={index}>
             <Comment data={comment} />
             <div className="m-2 p-2  border-l-black">
               <CommentList comments={comment.replies} />
@@ -101,12 +101,12 @@ const CommentList = ({ comments }) => {
 };
 const CommentsContainer = () => {
   return (
-    <>
+    <div className="w-[1/2]">
       <div className="font-bold text-lg">Comments:</div>
       <div>
         <CommentList comments={commentData} />
       </div>
-    </>
+    </div>
   );
 };
 
