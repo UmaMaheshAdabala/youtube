@@ -13,6 +13,7 @@ const VideoContainer = () => {
   useEffect(() => {
     getVideos();
   }, []);
+  console.log("Page Rendered");
   return (
     <div className="flex flex-wrap justify-center">
       {videos &&

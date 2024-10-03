@@ -18,7 +18,7 @@ const Head = () => {
   const handleSearchClick = () => {
     dispatch(searched());
   };
-
+  console.log("Head Render");
   useEffect(() => {
     // Concept of debouncing
     const timer = setTimeout(() => {
